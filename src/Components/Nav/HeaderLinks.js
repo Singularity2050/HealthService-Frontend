@@ -4,7 +4,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link, NavLink } from "react-router-dom";
-import { GoogleLogin, useGoogleLogout } from "react-google-login";
+import {GoogleLogin, GoogleLogout, useGoogleLogout} from "react-google-login";
 import { responseFailGoogle, logout } from "../../util/googleLogin";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -108,7 +108,7 @@ export default function HeaderLinks(props) {
 			</List>
 			<div id="googleLogin">
 				<GoogleLogin
-					clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
+					clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
 					buttonText="Login"
 					onSuccess={responseGoogle}
 					onFailure={responseFailGoogle}

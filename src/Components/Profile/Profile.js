@@ -173,7 +173,7 @@ const Profile = (props) => {
 						<div id="profile-logout">
 							<input type="submit" value="Save" className="save-button" />
 								<GoogleLogout
-									clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
+									clientId="547391741830-p8n5h72n96gqfedhp57rjbq82ggp00lj.apps.googleusercontent.com"
 									buttonText="Logout"
 									Style="display:none"
 									className="logout"
