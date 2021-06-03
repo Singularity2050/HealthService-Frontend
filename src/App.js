@@ -1,91 +1,136 @@
 import "./App.css";
-import Log from "./Components/LogDay/Log";
+
 import React, { useState, useEffect } from "react";
 import Questions from "./Components/EditQuestions/Questions";
 import { Route, Switch } from "react-router-dom";
-import { getQuestionsAPIMethod, getUserByAPIMethod } from "./api/client.js";
 import Data from "./Components/Data";
 import Profile from "./Components/Profile/Profile";
+import { isLoggedIn, loginAlert } from "./util/googleLogin";
+import Main from "./Components/Main";
+import LogCalories from "./Components/Calories/LogCalories";
+import { getUserStateByEmailAPIMethod } from "./api/client.js";
 
 function App() {
-	const defaultUser = {
-		name: "",
-		email: "",
-		address: [
-			{
-				streetAddress: "",
-				fullAddress: "",
-			},
-		],
-		profileImageURL: "",
-	};
+	// const defaultUser = {
+	// 	name: "",
+	// 	email: "",
+	// 	address: [
+	// 		{
+	// 			streetAddress: "",
+	// 			fullAddress: "",
+	// 		},
+	// 	],
+	// 	profileImageURL: "",
+	// };
 	const [questionState, setQuestionState] = useState([]);
 	const [isDataState, setIsDataStale] = useState(false);
-	const [userState, setUserState] = useState(defaultUser);
+	const [userState, setUserState] = useState(
+		isLoggedIn() ? JSON.parse(sessionStorage.getItem("userData")) : ""
+	);
+	const [isUserLoading, setIsUserLoading] = useState(true); // is the user information fetched from db ?
+	// const [userState, setUserState] = useState(
+	// 	JSON.parse(sessionStorage.getItem("userData"))
+	// );
 
-	// useEffect(async () => {
-	// 	await getQuestionsAPIMethod((questions) => {
+	// useEffect(() => {
+	// 	getQuestionsAPIMethod((questions) => {
 	// 		setQuestionState(questions);
 	// 	});
-	// 	await getUserByAPIMethod((user) => {
+	// 	getUserByAPIMethod((user) => {
 	// 		setUserState(user);
 	// 	});
 	// }, [isDataState]);
 
+	useEffect(() => {
+		if (isLoggedIn()) {
+			getUserStateByEmailAPIMethod(
+				JSON.parse(sessionStorage.getItem("userData")).email,
+				(response) => {
+					console.log(response);
+					setUserState(response);
+				}
+			);
+		}
+	}, []);
+
+	useEffect(() => {
+		if (userState && userState._id) {
+			console.log("userState updated from db");
+			console.log(userState);
+			setIsUserLoading(false);
+		}
+	}, [userState]);
+
 	return (
 		<div className="App">
 			<Switch>
+				<Route path="/" exact render={(props) => <Main {...props} />} />
 				<Route
-					path="/"
+					path="/calories"
 					exact
 					render={(props) => (
-						<Log
+						<LogCalories
 							{...props}
-							questionState={questionState}
 							userState={userState}
 							setUserState={setUserState}
+							isUserLoading={isUserLoading}
+							setIsUserLoading={setIsUserLoading}
 						/>
 					)}
 				/>
 				<Route
 					path="/questions"
 					exact
-					render={(props) => (
-						<Questions
-							{...props}
-							questionState={questionState}
-							setQuestionState={setQuestionState}
-							isDataState={isDataState}
-							setIsDataStale={setIsDataStale}
-							userState={userState}
-							setUserState={setUserState}
-						/>
-					)}
+					render={(props) =>
+						isLoggedIn() ? (
+							<Questions
+								{...props}
+								questionState={questionState}
+								setQuestionState={setQuestionState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+								userState={userState}
+								setUserState={setUserState}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
 				/>
 				<Route
-					path="/log"
+					path="/view"
 					exact
-					render={(props) => (
-						<Data
-							{...props}
-							questionState={questionState}
-							userState={userState}
-							setUserState={setUserState}
-						/>
-					)}
+					render={(props) =>
+						isLoggedIn() ? (
+							<Data
+								{...props}
+								questionState={questionState}
+								userState={userState}
+								setUserState={setUserState}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
 				/>
 				<Route
 					path="/profile"
 					exact
-					render={(props) => (
-						<Profile
-							{...props}
-							userState={userState}
-							setUserState={setUserState}
-							isDataState={isDataState}
-							setIsDataStale={setIsDataStale}
-						/>
-					)}
+					render={(props) =>
+						isLoggedIn() ? (
+							<Profile
+								{...props}
+								userState={userState}
+								setUserState={setUserState}
+								isDataState={isDataState}
+								setIsDataStale={setIsDataStale}
+								isUserLoading={isUserLoading}
+								setIsUserLoading={setIsUserLoading}
+							/>
+						) : (
+							loginAlert()
+						)
+					}
 				/>
 			</Switch>
 		</div>

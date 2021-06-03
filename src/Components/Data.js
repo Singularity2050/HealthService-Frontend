@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Nav from "./Nav/Nav";
 import { getResponsesAPIMethod } from "../api/client.js";
 
-const Data = async (props) => {
+const Data = (props) => {
 	let [responseState, setResponseState] = useState([]);
 	useEffect(() => {
 		getResponsesAPIMethod((response) => {

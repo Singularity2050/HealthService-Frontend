@@ -3,6 +3,8 @@ import Nav from "../Nav/Nav";
 import Calendar from "./Calendar";
 import FormRow from "./FormRow";
 import { createResponseByIdAPIMethod } from "../../api/client.js";
+import CustomizedSnackbars from "../../util/Alert";
+
 
 const Log = (props) => {
 	// Returns current date as string
@@ -12,7 +14,6 @@ const Log = (props) => {
 			date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
 		return date;
 	};
-
 	// Date State
 	const [dateState, setDateState] = useState(addDate());
 
@@ -55,7 +56,8 @@ const Log = (props) => {
 							);
 						})}
 						<div>
-							<input type="submit" value="Save" className="save-button right" />
+							{/*<input type="submit" value="Save" className="save-button right" />*/}
+							{CustomizedSnackbars()}
 						</div>
 					</div>
 				</form>

@@ -4,7 +4,10 @@ import {
 	uploadImageToCloudinaryAPIMethod,
 	updateUserByAPIMethod,
 } from "../../api/client";
+
 import {GoogleLogout} from "react-google-login";
+import {logout} from "../../util/googleLogin";
+
 
 const Profile = (props) => {
 	const defaultImage =
@@ -17,11 +20,8 @@ const Profile = (props) => {
 		});
 	};
 	const userData = JSON.parse(sessionStorage.getItem('userData'));
-	const logout = (res) =>{
-		sessionStorage.clear();
-		window.location.href = '/';
-	}
-	const imageChangeHandler = (e) => {
+
+	const imageChangeHandler = async (e) => {
 		e.preventDefault();
 		if (e.target.files && e.target.files[0]) {
 			const selectedFile = e.target.files[0];
@@ -31,7 +31,7 @@ const Profile = (props) => {
 			formData.append("file", selectedFile);
 			formData.append("upload_preset", unsignedUploadPreset);
 
-			uploadImageToCloudinaryAPIMethod(formData, (response) => {
+			await uploadImageToCloudinaryAPIMethod(formData, (response) => {
 				console.log("Upload success");
 
 				// Now the URL gets saved to the author
@@ -175,7 +175,7 @@ const Profile = (props) => {
 								<GoogleLogout
 									clientId="547391741830-p8ru0i3urt5bhnt5nqief36ns3n20gqv.apps.googleusercontent.com"
 									buttonText="Logout"
-									style="display:none"
+									Style="display:none"
 									className="logout"
 									onLogoutSuccess={logout}
 								>

@@ -5,6 +5,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { createQuestionAPIMethod } from "../../api/client.js";
 
 const Questions = (props) => {
+	console.log(props);
 	// Adds a question to the form
 	const addBtnHandler = async () => {
 		let currentState = [...props.questionState];
