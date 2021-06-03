@@ -1,0 +1,291 @@
+:root {
+	--actionBackgroundColor: #f76b8a;
+	--actionTextColor: white;
+	--activeColor: #66bfbf;
+	/* --standardBackgroundColor: #fcfefe; */
+	--standardBackgroundColor: #fbfeff;
+	--alternativeBackgroundColor: #eaf6f6;
+	--standardTextColor: black;
+	--lightColor: lightgray;
+	--moderateColor: darkgray;
+}
+
+body {
+	background-color: var(--alternativeBackgroundColor);
+	margin: 0;
+	padding: 0;
+}
+
+#nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	height: 55px;
+	padding: 15px;
+	background-color: var(--actionTextColor);
+}
+
+#links {
+	display: flex;
+	flex-direction: row;
+	flex: 50%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#image {
+	border-radius: 50%;
+	height: 70px;
+	width: 75px;
+}
+
+#calendar {
+	display: flex;
+	width: 600px;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	font-size: large;
+}
+
+#calendar div {
+	margin-left: 5%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+a {
+	text-decoration: none;
+	color: var(--standardTextColor);
+}
+
+#date-before,
+#date-after {
+	font-size: 30px;
+}
+
+#edit-image {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.form-row {
+	width: 600px;
+	background-color: var(--standardBackgroundColor);
+	border-radius: 5px;
+	border-color: var(--moderateColor);
+	margin: 10px;
+	padding: 5px !important;
+}
+.form-row div {
+	padding: 5px;
+}
+
+#body-items {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input {
+	padding-left: 5px;
+}
+
+.save-button {
+	width: 100px;
+	padding: 10px;
+	margin: 0px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: var(--actionBackgroundColor);
+	color: white;
+}
+
+.inactive-link {
+	text-decoration: none;
+}
+.active-link {
+	color: var(--activeColor);
+	text-decoration: underline;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline-color: var(--activeColor);
+}
+
+select {
+	border-color: var(--moderateColor);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+	border-color: var(--lightColor);
+	border-radius: 5px;
+	height: 25px;
+}
+
+input[type="text"],
+input[type="email"] {
+	width: 97%;
+}
+input[type="submit"]:hover,
+input[type="button"]:hover,
+label:hover,
+a:hover,
+button,
+svg:hover {
+	transform: scale(1.1);
+}
+
+.boolean-selectors {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.multiple-selectors {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.form-row-second {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.form-row-second select {
+	padding: 5px;
+	width: fit-content;
+	border-radius: 5px;
+	border-style: solid;
+	border-radius: 5px;
+}
+
+#add-btn {
+	border: none;
+	background-color: transparent;
+	font-size: 35px;
+	margin: 10px;
+}
+#questions-title {
+	width: 600px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.radio-text {
+	width: 200px !important;
+	margin-left: 10px;
+}
+
+.multiple-radio-selectors input {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	background-color: white;
+	border-bottom-color: var(--lightColor);
+}
+
+.radio-btn-disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.multiple-radio-selectors {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.alink:hover {
+	transform: scale(1.1);
+}
+
+#temp-page {
+	display: flex;
+	flex-direction: column;
+	margin: 40px;
+}
+
+.inside-items {
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#profile-logout {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-right: 15px;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+label {
+	color: black;
+	height: 30px;
+	padding: 5px;
+	width: fit-content;
+	border-radius: 7px;
+	background-color: var(--activeColor);
+}
+
+@media only screen and (max-width: 600px) {
+	.logo {
+		display: none;
+	}
+
+	#form-section {
+		width: 100vw !important;
+	}
+
+	#questions-title {
+		width: 100% !important;
+		margin-left: 20px !important;
+	}
+	.form-row {
+		width: 100% !important;
+	}
+	#calendar {
+		width: 100vw !important;
+	}
+
+	#calendar h2,
+	#save {
+		padding-left: 15px !important;
+	}
+
+	#nav {
+		width: 100vw !important;
+	}
+}
+
+#edit-profile {
+	width: 600px;
+	background-color: var(--standardBackgroundColor);
+}
+
+.underlined {
+	text-decoration: underline;
+}
+
+h3 {
+	margin: 10px;
+}
+#googleHide{
+	display:none;
+}
