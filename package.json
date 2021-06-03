@@ -1,7 +1,6 @@
 {
 	"name": "cse316",
 	"version": "0.2.0",
-
 	"private": true,
 	"proxy": "http://164.90.157.95:33333",
 	"dependencies": {
